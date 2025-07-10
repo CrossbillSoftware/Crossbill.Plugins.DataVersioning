@@ -1,0 +1,5 @@
+bin\@{env}\Crossbill.Plugins.DataVersioning.Git.dll => plugins\Crossbill.Plugins.DataVersioning.Git\Crossbill.Plugins.DataVersioning.Git.dll
+bin\@{env}\Crossbill.Plugins.DataVersioning.Git.deps.json => plugins\Crossbill.Plugins.DataVersioning.Git\Crossbill.Plugins.DataVersioning.Git.deps.json
+bin\@{env}\LibGit2Sharp.dll => plugins\Crossbill.Plugins.DataVersioning.Git\LibGit2Sharp.dll
+bin\@{env}\runtimes => runtimes
+plugins => plugins

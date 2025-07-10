@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+
+	<PropertyGroup>
+		<AssemblyTitle>Crossbill.Plugins.DataVersioning.Git</AssemblyTitle>
+		<Description>Resources repository versioning via Git for Crossbill Applications</Description>
+		<Copyright>Copyright © Crossbill, 2023, All Rights Reserved</Copyright>
+		<Product>Crossbill Applications</Product>
+		<Company>Crossbill</Company>
+		<Authors>Pavel Korsukov</Authors>
+		<GeneratePackageOnBuild Condition="'$(Configuration)' == 'Release'">True</GeneratePackageOnBuild>
+		<IsPackable>true</IsPackable>
+		<NuspecFile>Crossbill.Plugins.DataVersioning.Git.nuspec</NuspecFile><NuspecProperties>version=$(PackageVersion)</NuspecProperties>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="LibGit2Sharp" Version="0.29.0" />
+		<PackageReference Include="System.ComponentModel.Composition" Version="8.0.0" />
+		<PackageReference Include="Unity" Version="5.11.10" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  
+	  <Reference Include="Crossbill.Common">
+	    <HintPath>..\..\Crossbill.Common\Crossbill.Common\bin\$(Configuration)\$(TargetFramework)\Crossbill.Common.dll</HintPath>
+	  </Reference>
+	  <Reference Include="Crossbill.Licensing">
+	    <HintPath>..\..\Crossbill.Common\Crossbill.Licensing\bin\$(Configuration)\$(TargetFramework)\Crossbill.Licensing.dll</HintPath>
+	  </Reference>
+	  <Reference Include="Crossbill.Users.Lib">
+	    <HintPath>..\..\Crossbill.Common\Crossbill.Users.Lib\bin\$(Configuration)\$(TargetFramework)\Crossbill.Users.Lib.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
+	
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="'$(Configuration)' == 'Release'">
+	<Exec Command="xcopy /E /Y /d /I &quot;d:\Projects\Crossbill.Common\config\licenses\*.txt&quot; &quot;$(ProjectDir)plugins\$(ProjectName)&quot;" />
+	<Exec Command="c:\Crossbill.LicenseNoticeAggregator.lnk /project &quot;$(ProjectPath)&quot; /output &quot;$(ProjectDir)plugins\$(ProjectName)\third-party-notices.txt&quot; /exclude &quot;c:\Crossbill.LicenseNoticeAggregator\Crossbill.Central.Web&quot;" />
+  </Target>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+	  <!--Exec Condition="'$(Configuration)' == 'Debug'" Command="c:\Crossbill.Packager.lnk /mode copy /path &quot;$(ProjectDir).&quot; /dest &quot;C:\inetpub\Crossbill_Cone_Web-PROD&quot;" /-->
+	  <!--Exec  Condition="'$(Configuration)' == 'Release'" Command="c:\dotNETReactor.lnk -file &quot;$(TargetPath)&quot; -exception_handling 0 -necrobit 1 -necrobit_comp 1 -mapping_file 1 -exclude_fields 1  -exclude_enums 1 -exclude_compiler_fields 1 -quiet -licensing_behaviour 0 -targetfile &quot;&lt;AssemblyLocation&gt;\&lt;AssemblyFileName&gt;&quot;" /-->
+	  <Exec Condition="'$(Configuration)' == 'Release'" Command="c:\Crossbill.Packager.lnk /mode zip /path &quot;$(ProjectDir).&quot; /dest &quot;$(ProjectDir)bin/Plugin.zip&quot;" />
+  </Target>
+  
+  <Target Name="CopyPackage" AfterTargets="Pack">
+	<Copy SourceFiles="$(OutputPath)..\$(PackageId).$(PackageVersion).nupkg" DestinationFolder="d:\Projects\CROSS\Packs\" />
+  </Target>
+  
+ </Project>
