@@ -1,6 +1,6 @@
 # Data versioning GIT plugin for Crossbill products
 
-Crossbill.Plugins.DataVersioning.Git is the plugin written around Git library used for internal files repository data versioning in Crossbill products (including Crossbill Cone and Crossbill Bone). The plugin implements a common interface used for managing changes in files repository. Installing plugin on Cone or Bone enables versioning functionality including list of the object versions and revertion of the file changes.
+Crossbill.Plugins.DataVersioning.Git is the plugin written around the Git library used for internal files repository data versioning in Crossbill products (including Crossbill Cone and Crossbill Bone). The plugin implements a common interface used for managing changes in files repository. Installing the plugin on Cone or Bone enables versioning functionality including a list of the object versions and reversion of the file changes.
 
 ## Release version
 
