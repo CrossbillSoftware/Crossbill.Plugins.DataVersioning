@@ -66,7 +66,7 @@ namespace Crossbill.Plugins.DataVersioning.Git.Processors
                 return new GitSettings(dir);
             }
             var svc = _container.Resolve<IUserProcessor>();
-            cb_user profile = svc.Get(security.CurrentUserId);
+            cb_user profile = svc.GetResource(security.CurrentUserId);
             return new GitSettings(dir, profile.GetFullName(), profile.UserName);
         }
 

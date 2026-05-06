@@ -43,7 +43,7 @@
 	
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="'$(Configuration)' == 'Release'">
 	<Exec Command="xcopy /E /Y /d /I &quot;d:\Projects\Crossbill.Common\config\licenses\*.txt&quot; &quot;$(ProjectDir)plugins\$(ProjectName)&quot;" />
-	<Exec Command="c:\Crossbill.LicenseNoticeAggregator.lnk /project &quot;$(ProjectPath)&quot; /output &quot;$(ProjectDir)plugins\$(ProjectName)\third-party-notices.txt&quot; /exclude &quot;c:\Crossbill.LicenseNoticeAggregator\Crossbill.Central.Web&quot;" />
+	<Exec Command="c:\Crossbill.LicenseNoticeAggregator.lnk /project &quot;$(ProjectPath)&quot; /output &quot;$(ProjectDir)plugins\$(ProjectName)\third-party-notices.txt&quot;" />
   </Target>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
